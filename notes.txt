@@ -1,0 +1,30 @@
+Typescript
+-----------
+Types:
+  - Easy way to refer to different properties and functions that a value has.
+  - In the world of Typescript we hve tow different categories of types:
+    1- Primitive Types: number, boolean, void, undefined, string, symbol, null.
+    2- Object Types: functions, arrays, classes, objects.
+  - We use types everywhere.
+q1: What is a type?
+answer: An shortcut to refer to the different properties and functions that a value has.
+q2: In Typescript, what has a type?
+answer: Any value.
+q3: Why do we care about types?
+answer: They give the Typescript compiler information to analyze our code for errors.
+------------
+Type Annotations:
+  - Type Annotations => Code we add to tell Typescript what type of value that a variable can refers to.
+  - Type inference => Typescript try to figure out what type of value that a variable can refers to.
+  - Typescript can try to guess at the type of a variable based on what you assign to it.
+  - we use Type Annotations in trhee scenarios: (variables.ts line 45)
+    1- When the function return the 'Any' type, and we need to clarify the value.
+    2- When we declare a variable on one line, then initialze it later.
+    3- When we want a variable o have a type that cann't be inferred.
+
+Any Type:
+  - A type just like a "string" or "boolean".
+  - Means TS has no idia what this is.
+  - Avoid variables with "Any" at all costs.
+Fixing Any type:
+  - add type Annotation.
