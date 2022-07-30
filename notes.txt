@@ -28,3 +28,7 @@ Any Type:
   - Avoid variables with "Any" at all costs.
 Fixing Any type:
   - add type Annotation.
+-------------
+Type Annotation with functions:
+  - Type Annotation for functions: Code we add to tell Typescript what type pf arguments a function receive and what type of values it will return.
+  - Type inference for functions: Typescript tries to figure out what type of value a function will return.
