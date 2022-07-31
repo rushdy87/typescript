@@ -92,3 +92,18 @@ const washDishes = {
   completed: false
 };
 answer: Yes, because washDishes has all the same property names and types of Todo and Model.
+-------------
+Classes:
+  - Blueprint to create an object with some fields (values) and methods (functions) to represent a 'thing'.
+  - What is the different between Typescript Interfaces and Classes?
+    # Interfaces: Allow for defining a type that will be used during design and compile time for strong typing. They can be "implemented" or "extended" but cannot be instantiated (you can't new them). They get removed when transpiling down to JS so they take up no space, but they also cannot be type checked during runtime, so you can't check if a variable implements a specific type at runtime (e.g. foo instanceof bar), except by checking the properties it has: Interface type check with Typescript.
+    # When to use interfaces: Use them when you need to create a contract of the properties and functions for an object that will be used in more than one place in your code, especially more than one file or function. Also, use when you want other objects to start with this base set of properties, such as having a Vehicle interface that multiple classes implement as specific types of vehicles, like Car, Truck, Boat (e.g. class Car implements Vehicle).
+    # When not to use interfaces: When you want to have default values, implementations, constructors, or functions (not just signatures).
+    # Classes: Also allow for defining a type that will be used during design and compile time for strong typing, and, additional, can be used during runtime. This also means that the code is not compiled out, so it will take up space. This is one key difference mentioned by @Sakuto, but has more implications than just space. It means that classes can be typed checked, retaining the understanding of "who they are" even in the transpiled JS code. Further differences include: classes can be instantiated using new and can be extended, but not implemented. Classes can have constructors and actual function code along with default values.
+    # When to use classes: When you want to create objects that have actual function code in them, have a constructor for initialization, and/or you want to create instances of them with new. Also, for simple data objects, you can use classes for setting up default values. Another time you would want to use them is when you are doing type checking, though there are workarounds for interfaces if needed (see the interface section OS link).
+    # When not to use classes: When you have a simple data interface, do not need to instantiate it, when you want to have it implemented by other objects, when you want to simply put an interface on an existing object (think type definition files) or when the space it would take up is prohibitive or unwarranted. As a side note, if you look in .d.ts files you will notice that they only use interfaces and types, and thus this is completely removed when transpiled to TS.
+  - Modifiers: keyword we can place on different methods and properties inside a class.
+    # public. this method can be called any where, any time.
+    # private. this method can onle be called by other methods in this class.
+    # protected. this method can onle be called by other methods in this class, or by other methods in childe classes.
+    * by default all methods in class is public.
