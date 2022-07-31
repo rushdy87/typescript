@@ -35,3 +35,7 @@ Type Annotation with functions:
 -------------
 Arrays in Typescript:
   - each element with very consistent type of value (one a specific type of element).
+-------------
+Tuples:
+  - Array-like strcture where each element represents some property of a record.
+  
