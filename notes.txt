@@ -38,4 +38,57 @@ Arrays in Typescript:
 -------------
 Tuples:
   - Array-like strcture where each element represents some property of a record.
-  
+-------------
+Interfaces:
+  - Create a new type, describing the property names and value types of an object.
+  - Interface is a structure that defines the contract in your application.
+  - Classes that are derived from an interface must follow the structure provided by their interface.
+q1: The goal of an interface is to:
+answer: DEfine a new type.
+q2: Take a look at the following code.  What will Typescript do to decide if coffeeCup is of type Cup ?
+    interface Cup {
+      volume: number;
+      height: number;
+    }
+    const coffeeCup = {
+      volume: 300,
+      height: 20
+    };
+answer: Typescript will iterate through all the properties of the interface and make sure coffeeCup has the same properties with the same type.
+q3: Does the pineTree object successfully implement the Tree interface?
+    interface Tree {
+      height: number;
+      name: string;
+    }
+    const pineTree = {
+      height: 1200,
+      name: 'pine'
+    };
+answer: Yes.
+q4: Does the washDishes object implement the Todo interface?
+interface Todo {
+  id: number;
+  name: string;
+  completed: boolean;
+}
+const washDishes = {
+  id: 'AB20-49CD-11EA-4F2F',
+  name: 'Do the dishes',
+  completed: false
+};
+answer: No, because the Todo inference expects id to be a number, but washDishes provided a string.
+q5: Does washDishes implement both the Todo and Model interfaces?
+interface Todo {
+  id: number;
+  name: string;
+  completed: boolean;
+}
+interface Model {
+  id: number;
+}
+const washDishes = {
+  id: 20,
+  name: 'Do the dishes',
+  completed: false
+};
+answer: Yes, because washDishes has all the same property names and types of Todo and Model.
