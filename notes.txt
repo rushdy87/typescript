@@ -32,3 +32,6 @@ Fixing Any type:
 Type Annotation with functions:
   - Type Annotation for functions: Code we add to tell Typescript what type pf arguments a function receive and what type of values it will return.
   - Type inference for functions: Typescript tries to figure out what type of value a function will return.
+-------------
+Arrays in Typescript:
+  - each element with very consistent type of value (one a specific type of element).
