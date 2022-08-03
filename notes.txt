@@ -107,3 +107,7 @@ Classes:
     # private. this method can onle be called by other methods in this class.
     # protected. this method can onle be called by other methods in this class, or by other methods in childe classes.
     * by default all methods in class is public.
+-------------
+Type Guards:
+  - Type Guards allow you to narrow down the type of a variable within a conditional block.
+    

@@ -1,0 +1,29 @@
+configure th TS Compiler:
+1- Created a new tsconfig.json by using:
+    tsc --init
+the tsconfig.json contain all configuration to compile typescript files.
+2- in tsconfig.json we change the rootDir and outDir;
+  - rootDir: Specify the root folder within your source files. ('./src' in this app).
+  -outDir: Specify an output folder for all emitted files. ('./build' in this app).
+______________________________________________________________________________________
+tsc -w : run the app in watch mode. Watching for file changes.
+______________________________________________________________________________________
+concurrently: Run multiple commands concurrently. Like nodemon and tsc -w .
+______________________________________________________________________________________
+Abstract class: (see Sorter.ts file)
+  - Can't be used to create an object directly.
+  - Only used as a parent class.
+  - Can contain real implementation for some methods (like sort() in Sorter class).
+  - The implemented methods can refer to other methods that don't actually exist yet (
+    we still have to provide names and types for un-implemented methods).
+  - Can make a child class promise to implemente some othe method.
+______________________________________________________________________________________
+Interfaces vs Abstract Classes:
+  1- Interfaces:
+    * Sets up a contract between different classes.
+    * Use when we have very different objects that we want to work together.
+    * Promotes loose coupling.
+  2- Inheritance/ Abstract Classes:
+    * Sets up a contract between different classes.
+    * Use when we are trying to build up a definition of an object.
+    * Strongly couples classes together.
