@@ -12,11 +12,14 @@ Enums:
   - An enum is a special "class" that represents a group of constants (unchangeable variables).
   - Enums come in two flavors string and numeric.
 ______________________________________________________________________________________________________________________
+Tuples:
+  - Array-like strcture where each element represents some property of a record.
+______________________________________________________________________________________________________________________
 as:
   - The as keyword is a Type Assertion in TypeScript which tells the compiler to consider
   the object as another type than the type the compiler infers the object to be.
 ______________________________________________________________________________________________________________________
-Generics:
+Generics (we will stady it in future with more):
   - Like function arguments, but for types in class/function definition.
   - Allows us to define the type of a property/argument/return value at a future pint.
   - Used heavily when write reusable code.
@@ -31,4 +34,3 @@ ________________________________________________________________________________
 Inheritance vs. Composition
   -  Inheritance is an "is-a" relationship. Composition is a "has-a".
   - You do composition by having an instance of another class A as a field of your class, instead of extending A.
-  
