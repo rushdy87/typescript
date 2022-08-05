@@ -27,3 +27,8 @@ const holdNumber = new HoldAnything<number>();
 holdNumber.data = 10; // data is number
 const holdString = new HoldAnything<string>();
 holdString.data = "Some String"; //data is string
+______________________________________________________________________________________________________________________
+Inheritance vs. Composition
+  -  Inheritance is an "is-a" relationship. Composition is a "has-a".
+  - You do composition by having an instance of another class A as a field of your class, instead of extending A.
+  

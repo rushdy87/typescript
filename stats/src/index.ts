@@ -1,19 +1,28 @@
 import { MatchReader } from "./MatchReader";
-import { MatchResult } from "./MatchResult";
+import { Summery } from "./Summary";
 
-const reader = new MatchReader('football.csv');
-reader.read();
-// console.log(reader.data);
+const matchReader = MatchReader.fromCsv('football.csv')
+matchReader.load();
 
-let manUnitedWins = 0;
+const summary = Summery.winsAnalyssisWithHtmlReport('Man City'); //winsAnalyssisWithHtmlReport static method
+summary.buildAndPrintReport(matchReader.matches);
 
-for (const match of reader.data) {
-  if (match[1] === 'Man United' && match[5] === MatchResult.HomeWine) {
-    manUnitedWins++;
-  } else if (match[2] === 'Man United' && match[5] === MatchResult.AwayWine) {
-    manUnitedWins++;
-  }
-}
+/*
+// without using static method:
+import { MatchReader } from "./MatchReader";
+import { Summery } from "./Summary";
+import { CsvFileReader } from "./CsvFileReader";
+import { WinsAnalysis } from "./analyzers/WinsAnalysis";
+import { ConsoleReport } from "./reportTargets/ConsoleReport";
+import { HtmlReport } from "./reportTargets/HTMLReport";
 
-console.log(`Man United won ${manUnitedWins} games`);
+// Create an object that satisfies the 'DataReader' interface
+const csvFileReader = new CsvFileReader('football.csv');
 
+// Create an instanse of MatchReader and pass in something satisfying
+// the 'DataReader' interface
+const matchReader = new MatchReader(csvFileReader);
+matchReader.load();
+const summary = new Summery(new WinsAnalysis('Chelsea'), new HtmlReport());
+summary.buildAndPrintReport(matchReader.matches);
+*/
