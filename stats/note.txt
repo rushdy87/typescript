@@ -1,0 +1,29 @@
+Type Definition Files:
+  - When working with TypeScript, you can use JavaScript modules freely; create, export, import your own,
+  or install third-party libraries. Whenever you install an external module, TypeScript doesn't know anything
+  about it. And this is a problem for the language, as it cannot do its job - check your code for errors.
+  When you import a module into the TS file from a JavaScript library, you will likely see a warning,
+  saying that a module doesn't have a definition file.
+  - in this app, when we write: "import fs from 'fs';" without Type Definition, the compiler saying:
+  "Cannot find module 'fs' or its corresponding type declarations."
+  but when we install @types/node by running: "npm i @types/node"the error will go away.
+______________________________________________________________________________________________________________________
+Enums:
+  - An enum is a special "class" that represents a group of constants (unchangeable variables).
+  - Enums come in two flavors string and numeric.
+______________________________________________________________________________________________________________________
+as:
+  - The as keyword is a Type Assertion in TypeScript which tells the compiler to consider
+  the object as another type than the type the compiler infers the object to be.
+______________________________________________________________________________________________________________________
+Generics:
+  - Like function arguments, but for types in class/function definition.
+  - Allows us to define the type of a property/argument/return value at a future pint.
+  - Used heavily when write reusable code.
+class HoldAnything<TypeOfData>{ // (type parameter) TypeOfData in HoldAnything<TypeOfData>
+  data: TypeOfData;
+}
+const holdNumber = new HoldAnything<number>();
+holdNumber.data = 10; // data is number
+const holdString = new HoldAnything<string>();
+holdString.data = "Some String"; //data is string
