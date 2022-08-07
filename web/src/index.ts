@@ -1,13 +1,9 @@
 import { User } from "./models/User";
 
+const user = new User({ id: 1, name: 'Test1', age: 0 });
 
-// After Refactoring
-const user = new User({ name: 'Test4', age: 43 });
-const id = user.attributes.get('id');
-const name = user.attributes.get('name');
-const age = user.attributes.get('age');
+user.on('save', () => {
+  console.log(user);
+});
 
-user.sync.save({ id, name, age });
-
-// befor:
-// user.save();
+user.save();

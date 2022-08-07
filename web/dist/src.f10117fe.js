@@ -129,30 +129,29 @@ var Eventing =
 /** @class */
 function () {
   function Eventing() {
+    var _this = this;
+
     this.events = {};
+
+    this.on = function (eventName, callback) {
+      var handlers = _this.events[eventName] || [];
+      handlers.push(callback);
+      _this.events[eventName] = handlers;
+    };
+
+    this.trigger = function (eventName) {
+      var handlers = _this.events[eventName];
+
+      if (!handlers || handlers.length === 0) {
+        return;
+      }
+
+      handlers.forEach(function (callback) {
+        callback();
+      });
+    };
   }
 
-  Eventing.prototype.on = function (eventName, callback) {
-    var handlers = this.events[eventName] || [];
-    handlers.push(callback);
-    this.events[eventName] = handlers;
-  };
-
-  ;
-
-  Eventing.prototype.trigger = function (eventName) {
-    var handlers = this.events[eventName];
-
-    if (!handlers || handlers.length === 0) {
-      return;
-    }
-
-    handlers.forEach(function (callback) {
-      callback();
-    });
-  };
-
-  ;
   return Eventing;
 }();
 
@@ -4614,7 +4613,7 @@ function () {
     var id = data.id;
 
     if (id) {
-      return axios_1.default.put("{this.rootUrl}/".concat(id), data);
+      return axios_1.default.put("".concat(this.rootUrl, "/").concat(id), data);
     } else {
       return axios_1.default.post(this.rootUrl, data);
     }
@@ -4624,14 +4623,6 @@ function () {
 }();
 
 exports.Sync = Sync;
-/*
-.then((response: AxiosResponse): void => {
-        this.set(response.data)
-      })
-      .catch((err): void => {
-        console.log(err);
-      })
-*/
 },{"axios":"node_modules/axios/index.js"}],"src/models/Attributes.ts":[function(require,module,exports) {
 "use strict";
 
@@ -4660,18 +4651,24 @@ var Attributes =
 /** @class */
 function () {
   function Attributes(data) {
+    var _this = this;
+
     this.data = data;
+
+    this.get = function (key) {
+      return _this.data[key];
+    };
   }
-
-  Attributes.prototype.get = function (key) {
-    return this.data[key];
-  };
-
-  ;
 
   Attributes.prototype.set = function (update) {
     // Object.assign(this.data, update);
     this.data = __assign(__assign({}, this.data), update);
+  };
+
+  ;
+
+  Attributes.prototype.getAll = function () {
+    return this.data;
   };
 
   ;
@@ -4704,6 +4701,67 @@ function () {
     this.attributes = new Attributes_1.Attributes(attrs);
   }
 
+  ;
+  Object.defineProperty(User.prototype, "on", {
+    get: function get() {
+      return this.events.on; // return a reffrence to this.events.on
+    },
+    enumerable: false,
+    configurable: true
+  });
+  ;
+  Object.defineProperty(User.prototype, "trigger", {
+    get: function get() {
+      return this.events.trigger;
+    },
+    enumerable: false,
+    configurable: true
+  });
+  ;
+  Object.defineProperty(User.prototype, "get", {
+    get: function get() {
+      return this.attributes.get;
+    },
+    enumerable: false,
+    configurable: true
+  });
+  ;
+
+  User.prototype.set = function (update) {
+    this.attributes.set(update);
+    this.events.trigger('change');
+  };
+
+  ;
+
+  User.prototype.fetch = function () {
+    var _this = this;
+
+    var id = this.attributes.get('id');
+
+    if (typeof id !== 'number') {
+      throw new Error('Can not fetch without an id');
+    }
+
+    this.sync.fetch(id).then(function (response) {
+      _this.set(response.data); // we refreence to this.set because it has {this.attributes.set, and this.events.trigger}
+
+    });
+  };
+
+  ;
+
+  User.prototype.save = function () {
+    var _this = this;
+
+    this.sync.save(this.attributes.getAll()).then(function (response) {
+      _this.events.trigger('save');
+    }).catch(function () {
+      _this.events.trigger('error');
+    });
+  };
+
+  ;
   return User;
 }();
 
@@ -4715,22 +4773,17 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var User_1 = require("./models/User"); // After Refactoring
-
+var User_1 = require("./models/User");
 
 var user = new User_1.User({
-  name: 'Test4',
-  age: 43
+  id: 1,
+  name: 'Test1',
+  age: 0
 });
-var id = user.attributes.get('id');
-var name = user.attributes.get('name');
-var age = user.attributes.get('age');
-user.sync.save({
-  id: id,
-  name: name,
-  age: age
-}); // befor:
-// user.save();
+user.on('save', function () {
+  console.log(user);
+});
+user.save();
 },{"./models/User":"src/models/User.ts"}],"../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
@@ -4759,7 +4812,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63036" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62490" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

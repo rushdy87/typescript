@@ -14,20 +14,10 @@ export class Sync<T extends hasId> {
   save(data: T): AxiosPromise {
     const { id } = data;
     if (id) {
-      return axios.put(`{this.rootUrl}/${id}`, data);
+      return axios.put(`${this.rootUrl}/${id}`, data);
     } else {
       return axios.post(this.rootUrl, data);
     }
   }
 
 }
-
-
-/*
-.then((response: AxiosResponse): void => {
-        this.set(response.data)
-      })
-      .catch((err): void => {
-        console.log(err);
-      })
-*/

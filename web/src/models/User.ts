@@ -1,3 +1,5 @@
+import { AxiosResponse } from 'axios';
+
 import { Eventing } from './Eventing';
 import { Sync } from './Sync';
 import { Attributes } from './Attributes';
@@ -18,5 +20,45 @@ export class User {
 
   constructor(attrs: UserProps) {
     this.attributes = new Attributes<UserProps>(attrs);
-  }
+  };
+
+  get on() {
+    return this.events.on; // return a reffrence to this.events.on
+  };
+
+  get trigger() {
+    return this.events.trigger;
+  };
+
+  get get() {
+    return this.attributes.get;
+  };
+
+  set(update: UserProps): void {
+    this.attributes.set(update);
+    this.events.trigger('change');
+  };
+
+  fetch(): void {
+    const id = this.attributes.get('id');
+    if (typeof (id) !== 'number') {
+      throw new Error('Can not fetch without an id');
+    }
+    this.sync.fetch(id).then((response: AxiosResponse): void => {
+      this.set(response.data); // we refreence to this.set because it has {this.attributes.set, and this.events.trigger}
+    });
+  };
+
+
+  save(): void {
+    this.sync
+      .save(this.attributes.getAll())
+      .then((response: AxiosResponse): void => {
+        this.events.trigger('save');
+      })
+      .catch(() => {
+        this.events.trigger('error');
+      });
+  };
+
 }
