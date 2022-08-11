@@ -1,0 +1,15 @@
+1- HTTP Requst {
+  Headers: ...
+  body of request: (for exampile: name=name&password=password) // icoded state
+}
+2- Express server will genrate Requst Oject (the req argument in the route handler).
+  by default Request Object does not have a body proprty.
+3- Request Object passed in to bodyParser Middleware.
+4- the bodyParser Middleware inspect the incoming HTTP Request (in step 1) and see it has an actule body attched to it.
+  so the bodyParser is then going to parse that information right there (body of request) and attch it to Request Object (in step 2).
+_____________________________________________________________________________________
+Middleware in General:
+- Middleware does some processing of Request and Response.
+{req, res, next} --> Middleware (does some processing) --> Call next()
+- if there is np next Middleware, then the next function will be our request handler.
+_____________________________________________________________________________________
