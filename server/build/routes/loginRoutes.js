@@ -1,9 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.router = void 0;
-const express_1 = require("express"); // The Router() function is used to create a new router object.
+var express_1 = require("express"); // The Router() function is used to create a new router object.
 ;
-const requireAuth = (req, res, next) => {
+var requireAuth = function (req, res, next) {
     if (req.session && req.session.loggedIn) {
         next();
         return;
@@ -11,25 +11,10 @@ const requireAuth = (req, res, next) => {
     res.status(403);
     res.send('Not permitted');
 };
-const router = (0, express_1.Router)();
+var router = (0, express_1.Router)();
 exports.router = router;
-router.get('/login', (req, res) => {
-    res.send(`
-    <form method='POST'>
-      <div>
-        <lable>Email</lable>
-        <input name='email' />
-      </div>
-      <div>
-        <lable>Password</lable>
-        <input name='password' type='password' />
-      </div>
-      <button>Submit</button>
-    </form>
-  `);
-});
-router.post('/login', (req, res) => {
-    const { email, password } = req.body;
+router.post('/login', function (req, res) {
+    var _a = req.body, email = _a.email, password = _a.password;
     if (email && password && email === 'test@test.com' && password === '1234') {
         if (req.session) {
             req.session.loggedIn = true;
@@ -40,29 +25,19 @@ router.post('/login', (req, res) => {
         res.send('<h1>Invalid email or password!</h1>');
     }
 });
-router.get('/', (req, res) => {
+router.get('/', function (req, res) {
     console.log(req.session);
     if (req.session && req.session.loggedIn) {
-        res.send(`
-      <div>
-        <h1>You are Loged In..</h1>
-        <a href="/logout">Logout</a>
-      </div>
-    `);
+        res.send("\n      <div>\n        <h1>You are Loged In..</h1>\n        <a href=\"/logout\">Logout</a>\n      </div>\n    ");
     }
     else {
-        res.send(`
-      <div>
-        <h1>You are Not Loged In..</h1>
-        <a href="/login">Login</a>
-      </div>
-    `);
+        res.send("\n      <div>\n        <h1>You are Not Loged In..</h1>\n        <a href=\"/login\">Login</a>\n      </div>\n    ");
     }
 });
-router.get('/logout', (req, res) => {
+router.get('/logout', function (req, res) {
     req.session = undefined;
     res.redirect('/');
 });
-router.get('/protected', requireAuth, (req, res) => {
+router.get('/protected', requireAuth, function (req, res) {
     res.send('<h1>Wellcom To Protected rout, Login User!</h1>');
 });

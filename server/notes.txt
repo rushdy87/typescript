@@ -13,3 +13,17 @@ Middleware in General:
 {req, res, next} --> Middleware (does some processing) --> Call next()
 - if there is np next Middleware, then the next function will be our request handler.
 _____________________________________________________________________________________
+Decorators:
+  - function that can be used to modify/change/anything different properties/methods in the class.
+  - Not the same as javascript decorators.
+  - used inside/on classes only.
+  - Understanding the order in which decorators are run are the key to understanding them.
+  - Experimental.
+_____________________________________________________________________________________
+Metadata:
+  - Proposed feature to be added to Javascript (and thus, TS).
+  - Snippets of info that can be tied to a method, property, or class definition.
+  - Can be used for super custom stuff.
+  - Typescript will (optionally) provide type information as metadata.
+  - Read and written using the reflect-metadata package.
+_____________________________________________________________________________________
