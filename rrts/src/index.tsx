@@ -2,14 +2,37 @@ import React, { Component } from "react";
 import { createRoot } from 'react-dom/client';
 
 interface AppProps {
-  color: string
+  color: string;
 }
 
-class App extends Component<AppProps> {
+interface AppState {
+  counter: number;
+}
+
+class App extends Component<AppProps, AppState> {
+
+  constructor(props: AppProps) {
+    super(props);
+    this.state = {counter: 0};
+  }
+
+  onIncrement= () =>{
+    this.setState({counter: this.state.counter + 1});
+  };
+  
+  onDecrement= () =>{
+    this.setState({counter: this.state.counter - 1});
+  };
+
   render() {
     return (
-      <div
-        style={{color: this.props.color}}>Hi, From React, Redux, Typescript!
+      <div>
+        <h1>Hi, From React, Redux, Typescript!</h1>
+        <div style={{color: this.props.color}}>
+          <p>{this.state.counter}</p>
+          <button onClick={this.onIncrement}>Increment</button>
+          <button onClick={this.onDecrement}>Decrement</button>
+        </div>
       </div>
     );
   }
